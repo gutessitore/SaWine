@@ -1,4 +1,5 @@
 import json
+import os
 import string
 from collections import Counter
 
@@ -7,6 +8,9 @@ from nltk.corpus import stopwords
 from tqdm import tqdm
 
 nltk.download('stopwords')
+
+
+project_root = os.path.abspath(__file__).split('src')[0]
 
 
 class TextProcessor:
@@ -66,9 +70,11 @@ class SubProcessor(TextProcessor):
 
 
 # Usage:
-processor = TextProcessor('../../../../../SaWine/src/scrapers/blogdosvinhos.txt')
+filename = os.path.join(project_root, 'src', 'data', 'cnnviagemegastronomia.txt')
+processor = TextProcessor(filename)
 processor_result = processor.sorted_word_frequencies()
 
+print(json.dumps(processor_result, indent=4, ensure_ascii=False))
 
 results = {}
 
@@ -78,7 +84,7 @@ search_words = [
 ]
 
 for word in tqdm(processor_result.keys()):
-    sub_processor = SubProcessor('../../../../../SaWine/src/scrapers/blogdosvinhos.txt', word)
+    sub_processor = SubProcessor(filename, word)
     results.update(sub_processor.get_word_frequencies())
 
-print(json.dumps(results, indent=4, ensure_ascii=False))
+# print(json.dumps(results, indent=4, ensure_ascii=False))

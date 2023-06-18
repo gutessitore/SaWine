@@ -1,6 +1,7 @@
 from abc import abstractmethod
 from selenium import webdriver
 from contextlib import closing
+import os
 
 
 class BaseScraper:
@@ -16,6 +17,8 @@ class BaseScraper:
 
     def save_contents_to_file(self, filename):
         # save file on project root / src / data
+        project_root = os.path.abspath(__file__).split('src')[0]
+        filename = os.path.join(project_root, 'src', 'data', filename)
         with open(filename, 'w', encoding='utf-8') as f:
             f.write('\n\n'.join(self.contents))
 

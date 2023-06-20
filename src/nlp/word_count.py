@@ -32,7 +32,7 @@ class WordCounter:
         words_exploded = words_filtered.select(explode(col('filtered_words')).alias('word'))
 
         # Filtrar palavras com base em uma lista
-        words_to_filter = ["", "-", "url:", "artigo:", "r$", "this:"]  # Substitua com as palavras que deseja filtrar
+        words_to_filter = ["", "-", "url:", "artigo:", "r$", "this:", "e,", "pra", "tá", "vai"]  # Substitua com as palavras que deseja filtrar
         filtered_words = words_exploded.filter(~col('word').isin(words_to_filter))
 
         # Contar as palavras

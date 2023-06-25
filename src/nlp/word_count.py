@@ -51,6 +51,7 @@ class WordCounter:
 
                 print(f'Word counts in {file_name}:')
                 word_count.show()
+                word_count.toPandas().to_csv(f'../data/word_count_{file_name.replace(".txt", "")}.csv', index=False)
 
 
 def main():

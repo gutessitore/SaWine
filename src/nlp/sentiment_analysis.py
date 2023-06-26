@@ -14,7 +14,7 @@ class ReviewClassifier:
         self.__authenticate()
 
     def __authenticate(self):
-        openai.api_key = "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"
+        openai.api_key = os.getenv("OPENAI_API_KEY")
 
     def get_sentiment(self, review):
         prompt = self.prompt.format(review)
